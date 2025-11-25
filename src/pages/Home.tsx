@@ -1,4 +1,5 @@
 // Components;
+import CountryInfo from '@/components/CountryInfo';
 import Header from '@/components/Header';
 
 // Icons;
@@ -6,11 +7,11 @@ import { MdSearch } from 'react-icons/md';
 
 function Home() {
   return (
-    <div className="bg-bg-light h-dvh">
+    <div className="bg-bg-light min-h-dvh pb-4">
       <Header />
       <main className="px-4 lg:px-24">
         {/* Search input */}
-        <section className="mt-8 items-center space-y-8 sm:flex sm:justify-between sm:space-y-0">
+        <section className="mt-8 items-center space-y-6 sm:justify-between md:flex md:space-y-0">
           <article className="bg-text-dark relative mx-auto h-12 w-full rounded-md shadow-sm sm:mx-0 sm:max-w-[400px]">
             <input
               type="text"
@@ -32,6 +33,10 @@ function Home() {
               <option value="Oceania">Oceania</option>
             </select>
           </article>
+        </section>
+
+        <section className="mt-8 flex flex-wrap justify-between gap-8 pb-8">
+          <CountryInfo />
         </section>
       </main>
     </div>
