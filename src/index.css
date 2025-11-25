@@ -11,6 +11,8 @@
 
   --color-bg-dark: oklch(0.2882 0.0252 243.46); /*(Dark Mode Background)*/
   --color-element-dark: oklch(0.3362 0.0283 246.95); /*(Dark Mode Elements)*/
+
+  --shadow-sm: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 @layer base {
