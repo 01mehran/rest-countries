@@ -1,11 +1,11 @@
-import Home from './pages/Home';
-// import CountryDetail from '@/components/CountryDetail';
+// import Home from './pages/Home';
+import CountryDetail from '@/components/CountryDetail';
 
 function App() {
   return (
     <>
-      <Home />
-    {/* <CountryDetail /> */}
+      {/* <Home /> */}
+    <CountryDetail />
     </>
   );
 }

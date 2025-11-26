@@ -6,10 +6,10 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 
 function CountryDetail() {
   return (
-    <div className="bg-bg-light h-dvh">
+    <div className="bg-bg-light dark:bg-bg-dark min-h-dvh">
       <Header />
       <main className="px-4 pt-8 lg:px-24">
-        <button className="text-text-light/80 flex cursor-pointer items-center justify-center gap-2 rounded-md px-4 py-px font-semibold shadow-[0px_0px_5px_rgba(0,0,0,0.25)] transition-all duration-200 hover:-translate-x-px">
+        <button className="text-text-light/80 dark:text-text-dark dark:bg-element-dark flex cursor-pointer items-center justify-center gap-2 rounded-md px-4 py-px font-semibold shadow-[0px_0px_5px_rgba(0,0,0,0.25)] transition-transform duration-200 hover:-translate-x-px">
           <IoIosArrowRoundBack className="text-3xl" />
           Back
         </button>
@@ -25,38 +25,38 @@ function CountryDetail() {
           </div>
           {/* Country details */}
           <div className="mt-6 flex flex-col justify-around space-y-6">
-            <div className="w-full">
+            <div className="dark:text-text-dark/80 w-full">
               {/* Details */}
               <h3 className="text-2xl font-bold">Germany</h3>
               <div className="mt-4 w-full space-y-6 md:flex md:gap-22">
                 <article className="leading-6 md:leading-8 lg:leading-6">
                   <p className="font-medium md:text-xl">
                     Native Name:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       Belgium
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Population:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       11.319.915
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Region:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       Europe
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Sub Region:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       Western Europe
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Capital:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       Brussels
                     </span>
                   </p>
@@ -64,19 +64,19 @@ function CountryDetail() {
                 <article className="leading-6 md:leading-8">
                   <p className="font-medium md:text-xl">
                     Top Level Domain:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       .be
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Currencies:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       Euro
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Languages:{' '}
-                    <span className="text-[14px] font-light md:text-lg">
+                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
                       Dutch, French, German
                     </span>
                   </p>
@@ -84,9 +84,9 @@ function CountryDetail() {
               </div>
             </div>
             {/* Border countries */}
-            <div className="gap-4 space-y-2 sm:flex lg:items-center lg:space-y-0">
+            <div className="dark:text-text-dark/80 gap-4 space-y-2 sm:flex lg:items-center lg:space-y-0">
               <p className="font-medium md:text-xl">Border Countries:</p>
-              <button className="w-26 cursor-pointer rounded-sm px-2 py-px shadow-md">
+              <button className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md">
                 France
               </button>
             </div>
