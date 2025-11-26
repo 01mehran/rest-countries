@@ -1,5 +1,7 @@
-// Icons;
+// Contexts;
 import { useTheme } from '@/contexts/ThemeContext';
+
+// Icons;
 import { IoMoonOutline } from 'react-icons/io5';
 import { LuSunMedium } from 'react-icons/lu';
 
@@ -7,7 +9,7 @@ function Header() {
   const { theme, handleToggleTheme } = useTheme();
 
   return (
-    <header className="bg-text-dark text-element-dark flex h-17 items-center justify-between px-4 shadow-sm lg:px-24">
+    <header className="bg-text-dark text-element-dark dark:bg-element-dark dark:text-text-dark flex h-17 items-center justify-between px-4 shadow-sm lg:px-24">
       <h1 className="text-lg font-extrabold sm:text-xl">Where in the world?</h1>
 
       <div

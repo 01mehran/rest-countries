@@ -7,22 +7,22 @@ import { MdSearch } from 'react-icons/md';
 
 function Home() {
   return (
-    <div className="bg-bg-light min-h-dvh pb-4 dark:bg-black">
+    <div className="bg-bg-light dark:bg-bg-dark min-h-dvh pb-4">
       <Header />
       <main className="px-4 lg:px-24">
         {/* Search input */}
         <section className="mt-8 items-center space-y-6 sm:justify-between md:flex md:space-y-0">
-          <article className="bg-text-dark relative mx-auto h-12 w-full rounded-md shadow-sm sm:mx-0 sm:max-w-[400px]">
+          <article className="bg-text-dark dark:bg-element-dark relative mx-auto h-12 w-full rounded-md shadow-sm sm:mx-0 sm:max-w-[400px]">
             <input
               type="text"
               placeholder="Search for a country..."
-              className="placeholder:text-input-light h-full w-full rounded-md border-0 pr-4 pl-18 tracking-tight outline-0 placeholder:text-[14px] placeholder:font-medium"
+              className="placeholder:text-input-light dark:text-text-dark dark:placeholder:text-text-dark h-full w-full rounded-md border-0 pr-4 pl-18 tracking-tight outline-0 placeholder:text-[14px] placeholder:font-medium"
             />
-            <MdSearch className="text-input-light absolute top-1/2 translate-7 -translate-y-1/2 transform text-2xl" />
+            <MdSearch className="text-input-light dark:text-text-dark absolute top-1/2 translate-7 -translate-y-1/2 transform text-2xl" />
           </article>
           {/* Filter by region */}
-          <article className="bg-text-dark w-42 rounded-md px-1.5 shadow-sm">
-            <select className="text-element-dark flex h-12 w-full items-center rounded-md border-0 pr-4 text-2xl text-[14px] font-semibold outline-0">
+          <article className="bg-text-dark dark:bg-element-dark w-42 rounded-md px-1.5 shadow-sm">
+            <select className="text-element-dark dark:text-text-dark dark:bg-element-dark flex h-12 w-full items-center rounded-md border-0 pr-4 text-2xl text-[14px] font-semibold outline-0">
               <option defaultValue="Filter by Region" disabled hidden></option>
               <option value="Africa">Africa</option>
               <option value="America">America</option>
@@ -33,7 +33,7 @@ function Home() {
           </article>
         </section>
 
-        <section className="mt-8 flex flex-wrap justify-between gap-8 pb-8">
+        <section className="mt-8 flex flex-wrap justify-between gap-8">
           <CountryInfo />
         </section>
       </main>
