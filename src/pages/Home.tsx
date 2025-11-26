@@ -7,7 +7,7 @@ import { MdSearch } from 'react-icons/md';
 
 function Home() {
   return (
-    <div className="bg-bg-light min-h-dvh pb-4">
+    <div className="bg-bg-light min-h-dvh pb-4 dark:bg-black">
       <Header />
       <main className="px-4 lg:px-24">
         {/* Search input */}
@@ -23,9 +23,7 @@ function Home() {
           {/* Filter by region */}
           <article className="bg-text-dark w-42 rounded-md px-1.5 shadow-sm">
             <select className="text-element-dark flex h-12 w-full items-center rounded-md border-0 pr-4 text-2xl text-[14px] font-semibold outline-0">
-              <option selected disabled hidden>
-                Filter by Region
-              </option>
+              <option defaultValue="Filter by Region" disabled hidden></option>
               <option value="Africa">Africa</option>
               <option value="America">America</option>
               <option value="Asia">Asia</option>
