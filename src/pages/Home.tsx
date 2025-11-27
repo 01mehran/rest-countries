@@ -1,11 +1,50 @@
 // Components;
 import CountryInfo from '@/components/CountryInfo';
 import Header from '@/components/Header';
+import { useEffect, useState } from 'react';
 
 // Icons;
 import { MdSearch } from 'react-icons/md';
 
+export interface TCountry {
+  id: string;
+  flag: string;
+  name: string;
+  population: number;
+  region: string;
+  capital: string;
+}
+
 function Home() {
+  const [data, setData] = useState<TCountry[]>([]);
+  const [lodaing, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    setLoading(true);
+    async function getCountries() {
+      try {
+        const res = await fetch('http://localhost:5000/countries');
+        if (!res.ok) throw new Error('Something went wrong');
+
+        const data: TCountry[] = await res.json();
+        setData(data);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError(String(err));
+        }
+      }
+    }
+
+    getCountries();
+  }, []);
+
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh pb-4">
       <Header />
@@ -34,7 +73,12 @@ function Home() {
         </section>
 
         <section className="mt-8 flex flex-wrap justify-between gap-8">
-          <CountryInfo />
+          <p className="text-white font-bold">{error}</p>
+          {lodaing ? (
+            <div className="absolute top-1/2 left-1/2 size-18 -translate-x-1/2 transform animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+          ) : (
+            data.map((data) => <CountryInfo key={data.id} data={data} />)
+          )}
         </section>
       </main>
     </div>
