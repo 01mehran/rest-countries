@@ -85,8 +85,12 @@ function Home() {
           </article>
         </section>
 
-        <section className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-6 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:gap-18">
-          {error && <p className="font-bold text-white">{error}</p>}
+        <section className="mx-10 mt-8 grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-6 sm:mx-0 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:gap-18">
+          {error && (
+            <p className="font-bold text-red-600 text-shadow-md text-shadow-slate-300 dark:text-shadow-black">
+              {error}
+            </p>
+          )}
 
           {lodaing ? (
             <div className="absolute top-1/2 left-1/2 size-18 -translate-x-1/2 transform animate-spin rounded-full border-2 border-white border-t-transparent"></div>
