@@ -1,21 +1,21 @@
 import type { TCountry } from '@/pages/Home';
 
-interface CountryInfoProps {
+interface TCountryInfoProps {
   data: TCountry;
 }
 
-function CountryInfo({ data }: CountryInfoProps) {
+function CountryInfo({ data }: TCountryInfoProps) {
   return (
     <div className="bg-text-dark dark:bg-element-dark dark:text-bg-light/90 dark:shadow-bg-dark h-80 w-full cursor-pointer rounded-md shadow-sm transition-transform duration-200 hover:scale-105 hover:shadow-md dark:shadow-xl">
       <article className="h-40">
         <img
-          src={data.flag}
-          alt="country flag"
+          src={data.flag.png}
+          alt={`${data.name.common} flag`}
           className="h-full w-full rounded-t-md object-cover"
         />
       </article>
       <article className="p-5">
-        <p className="mb-3 font-bold">{data.name}</p>
+        <p className="mb-3 font-bold">{data.name.common}</p>
         <div className="flex flex-col space-y-px leading-6">
           <p className="text-[13px] font-medium">
             Population:{' '}

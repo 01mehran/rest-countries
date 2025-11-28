@@ -7,28 +7,39 @@ import { useEffect, useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 
 export interface TCountry {
-  id: string;
-  flag: string;
-  name: string;
+  id: number;
+  flag: { png: string };
+  name: { common: string };
   population: number;
   region: string;
-  capital: string;
+  capital?: string[];
 }
 
 function Home() {
   const [data, setData] = useState<TCountry[]>([]);
   const [lodaing, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const base_url = `https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags`;
 
   useEffect(() => {
     setLoading(true);
     async function getCountries() {
       try {
-        const res = await fetch('http://localhost:5000/countries');
+        const res = await fetch(base_url);
         if (!res.ok) throw new Error('Something went wrong');
 
-        const data: TCountry[] = await res.json();
-        setData(data);
+        const rawData = await res.json();
+
+        const formatted: TCountry[] = rawData.map((c: any, i: number) => ({
+          id: i,
+          flag: { png: c.flags?.png },
+          name: { common: c.name?.common },
+          population: c.population,
+          region: c.region,
+          capital: c.capital,
+        }));
+
+        setData(formatted);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -39,6 +50,8 @@ function Home() {
         } else {
           setError(String(err));
         }
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -78,7 +91,9 @@ function Home() {
           {lodaing ? (
             <div className="absolute top-1/2 left-1/2 size-18 -translate-x-1/2 transform animate-spin rounded-full border-2 border-white border-t-transparent"></div>
           ) : (
-            data.map((data) => <CountryInfo key={data.id} data={data} />)
+            data.map((country) => (
+              <CountryInfo key={country.id} data={country} />
+            ))
           )}
         </section>
       </main>
