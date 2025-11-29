@@ -13,13 +13,14 @@ export interface TCountry {
   population: number;
   region: string;
   capital?: string[];
+  cca3: string;
 }
 
 function Home() {
   const [data, setData] = useState<TCountry[]>([]);
   const [lodaing, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const base_url = `https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags`;
+  const base_url = `https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags,cca3`;
 
   useEffect(() => {
     setLoading(true);
@@ -37,6 +38,7 @@ function Home() {
           population: c.population,
           region: c.region,
           capital: c.capital,
+          cca3: c.cca3,
         }));
 
         setData(formatted);
