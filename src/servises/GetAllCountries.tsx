@@ -15,7 +15,7 @@ export interface TAllCountries {
 function GetAllCountries() {
   // States;
   const [allCountries, setAllCountries] = useState<TAllCountries[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<string | null>(null);
 
   const base_url = `https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags,cca3`;

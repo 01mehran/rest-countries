@@ -9,14 +9,21 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 
 // Services;
 import GetcountryDetails from '@/servises/GetcountryDetails';
+import Loading from './Loading';
 
 function CountryDetail() {
   // Get cca3(code) from url params;
   const { cca3 } = useParams();
 
   // Get country details from service;
-  const { allDetails, nativeName, currencyName, currencySymbol, allLanguages } =
-    GetcountryDetails(cca3!);
+  const {
+    allDetails,
+    nativeName,
+    currencyName,
+    currencySymbol,
+    allLanguages,
+    isLoading,
+  } = GetcountryDetails(cca3!);
 
   // Navigate hook for direct navigation;
   const navigate = useNavigate();
@@ -34,87 +41,95 @@ function CountryDetail() {
         </button>
 
         <section className="mt-8 pb-4 lg:gap-22 xl:flex">
-          {/* Country flag */}
-          <div className="md:w-[70%] lg:w-[40%]">
-            <img
-              src={allDetails?.flags.png}
-              alt={`${allDetails?.name.common} flag`}
-              className="h-full w-full rounded-md object-cover"
-            />
-          </div>
-          {/* Country details */}
-          <div className="mt-6 flex flex-col justify-around space-y-6">
-            <div className="dark:text-text-dark/80 w-full">
-              {/* Details */}
-              <h3 className="text-2xl font-bold">{allDetails?.name.common}</h3>
-              <div className="mt-4 w-full space-y-6 md:flex md:gap-22">
-                <article className="leading-6 md:leading-8 lg:leading-6">
-                  <p className="font-medium md:text-xl">
-                    Native Name:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {nativeName}
-                    </span>
-                  </p>
-                  <p className="font-medium md:text-xl">
-                    Population:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {allDetails?.population.toLocaleString()}
-                    </span>
-                  </p>
-                  <p className="font-medium md:text-xl">
-                    Region:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {allDetails?.region}
-                    </span>
-                  </p>
-                  <p className="font-medium md:text-xl">
-                    Sub Region:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {allDetails?.subregion}
-                    </span>
-                  </p>
-                  <p className="font-medium md:text-xl">
-                    Capital:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {allDetails?.capital}
-                    </span>
-                  </p>
-                </article>
-                <article className="leading-6 md:leading-8">
-                  <p className="font-medium md:text-xl">
-                    Top Level Domain:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {allDetails?.tld?.toLocaleString()}
-                    </span>
-                  </p>
-                  <p className="font-medium md:text-xl">
-                    Currencies:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {currencyName} {currencySymbol && currencySymbol}
-                    </span>
-                  </p>
-                  <p className="font-medium md:text-xl">
-                    Languages:{' '}
-                    <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {allLanguages}
-                    </span>
-                  </p>
-                </article>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <>
+              {/* Country flag */}
+              <div className="md:w-[70%] lg:w-[40%]">
+                <img
+                  src={allDetails?.flags.png}
+                  alt={`${allDetails?.name.common} flag`}
+                  className="h-full w-full rounded-md object-cover"
+                />
               </div>
-            </div>
-            {/* Border countries */}
-            <div className="dark:text-text-dark/80 flex-wrap gap-4 space-y-2 sm:flex lg:items-center lg:space-y-0">
-              <p className="font-medium md:text-xl">Border Countries:</p>
-              {allDetails?.borders?.map((b) => (
-                <button
-                  key={b}
-                  className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md"
-                >
-                  {b}
-                </button>
-              ))}
-            </div>
-          </div>
+              {/* Country details */}
+              <div className="mt-6 flex flex-col justify-around space-y-6">
+                <div className="dark:text-text-dark/80 w-full">
+                  {/* Details */}
+                  <h3 className="text-2xl font-bold">
+                    {allDetails?.name.common}
+                  </h3>
+                  <div className="mt-4 w-full space-y-6 md:flex md:gap-22">
+                    <article className="leading-6 md:leading-8 lg:leading-6">
+                      <p className="font-medium md:text-xl">
+                        Native Name:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {nativeName}
+                        </span>
+                      </p>
+                      <p className="font-medium md:text-xl">
+                        Population:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {allDetails?.population.toLocaleString()}
+                        </span>
+                      </p>
+                      <p className="font-medium md:text-xl">
+                        Region:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {allDetails?.region}
+                        </span>
+                      </p>
+                      <p className="font-medium md:text-xl">
+                        Sub Region:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {allDetails?.subregion}
+                        </span>
+                      </p>
+                      <p className="font-medium md:text-xl">
+                        Capital:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {allDetails?.capital}
+                        </span>
+                      </p>
+                    </article>
+                    <article className="leading-6 md:leading-8">
+                      <p className="font-medium md:text-xl">
+                        Top Level Domain:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {allDetails?.tld?.toLocaleString()}
+                        </span>
+                      </p>
+                      <p className="font-medium md:text-xl">
+                        Currencies:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {currencyName} {currencySymbol && currencySymbol}
+                        </span>
+                      </p>
+                      <p className="font-medium md:text-xl">
+                        Languages:{' '}
+                        <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
+                          {allLanguages}
+                        </span>
+                      </p>
+                    </article>
+                  </div>
+                </div>
+                {/* Border countries */}
+                <div className="dark:text-text-dark/80 flex-wrap gap-4 space-y-2 sm:flex lg:items-center lg:space-y-0">
+                  <p className="font-medium md:text-xl">Border Countries:</p>
+                  {allDetails?.borders?.map((b) => (
+                    <button
+                      key={b}
+                      className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md"
+                    >
+                      {b}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </section>
       </main>
     </div>

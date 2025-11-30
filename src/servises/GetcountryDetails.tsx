@@ -33,8 +33,10 @@ interface TCountryDetail {
 
 function GetcountryDetails(cca3: string) {
   const [allDetails, setAllDetails] = useState<TCountryDetail | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     async function getACountry() {
       try {
         const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}`);
@@ -42,8 +44,10 @@ function GetcountryDetails(cca3: string) {
 
         const data = await res.json();
         setAllDetails(data[0]);
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
+        setIsLoading(false);
       }
     }
 
@@ -71,6 +75,7 @@ function GetcountryDetails(cca3: string) {
     currencyName,
     currencySymbol,
     allLanguages,
+    isLoading,
   };
 }
 
