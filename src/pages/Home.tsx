@@ -49,7 +49,7 @@ function Home() {
             <div className="absolute top-1/2 left-1/2 size-18 -translate-x-1/2 transform animate-spin rounded-full border-2 border-white border-t-transparent"></div>
           ) : (
             allCountries.map((country) => (
-              <CountryInfo key={country.id} data={country} />
+              <CountryInfo key={country.id} countryData={country} />
             ))
           )}
         </section>

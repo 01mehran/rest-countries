@@ -1,76 +1,25 @@
-// Components;
+// Hooks;
 import { useNavigate, useParams } from 'react-router-dom';
+
+// Components;
 import Header from './Header';
 
 // Icons;
 import { IoIosArrowRoundBack } from 'react-icons/io';
-import { useEffect, useState } from 'react';
 
-interface TCountryDetail {
-  name: {
-    common: string;
-    nativeName: {
-      [key: string]: {
-        common: string;
-      };
-    };
-  };
-  flags: {
-    png: string;
-  };
-  population: number;
-  region: string;
-  subregion?: string;
-  capital?: string;
-  languages: {
-    [key: string]: string;
-  };
-  cca3: string;
-  currencies?: {
-    [key: string]: {
-      name: string;
-      symbol: string;
-    };
-  };
-  tld?: string[];
-  borders?: string[];
-}
+// Services;
+import GetcountryDetails from '@/servises/GetcountryDetails';
 
 function CountryDetail() {
+  // Get cca3(code) from url params;
   const { cca3 } = useParams();
-  const [data, setData] = useState<TCountryDetail | null>(null);
+
+  // Get country details from service;
+  const { allDetails, nativeName, currencyName, currencySymbol, allLanguages } =
+    GetcountryDetails(cca3!);
+
+  // Navigate hook for direct navigation;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function getACountry() {
-      try {
-        const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}`);
-        if (!res.ok) throw new Error('Network Error!');
-
-        const data = await res.json();
-        setData(data[0]);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    getACountry();
-  }, [cca3]);
-
-  data && console.log(data);
-  const nativeCommon =
-    data?.name.nativeName[Object.keys(data?.name.nativeName)[0]].common;
-
-  const currencyName = data?.currencies
-    ? data.currencies[Object.keys(data.currencies)[0]].name
-    : 'N/A';
-
-  const currencySymbol = data?.currencies
-    ? data.currencies[Object.keys(data.currencies)[0]].symbol
-    : '';
-  const allLanguages = data?.languages
-    ? Object.values(data.languages).join(', ')
-    : 'N/A';
 
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh">
@@ -88,8 +37,8 @@ function CountryDetail() {
           {/* Country flag */}
           <div className="md:w-[70%] lg:w-[40%]">
             <img
-              src={data?.flags.png}
-              alt={`${data?.name.common} flag`}
+              src={allDetails?.flags.png}
+              alt={`${allDetails?.name.common} flag`}
               className="h-full w-full rounded-md object-cover"
             />
           </div>
@@ -97,37 +46,37 @@ function CountryDetail() {
           <div className="mt-6 flex flex-col justify-around space-y-6">
             <div className="dark:text-text-dark/80 w-full">
               {/* Details */}
-              <h3 className="text-2xl font-bold">{data?.name.common}</h3>
+              <h3 className="text-2xl font-bold">{allDetails?.name.common}</h3>
               <div className="mt-4 w-full space-y-6 md:flex md:gap-22">
                 <article className="leading-6 md:leading-8 lg:leading-6">
                   <p className="font-medium md:text-xl">
                     Native Name:{' '}
                     <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {nativeCommon}
+                      {nativeName}
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Population:{' '}
                     <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {data?.population.toLocaleString()}
+                      {allDetails?.population.toLocaleString()}
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Region:{' '}
                     <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {data?.region}
+                      {allDetails?.region}
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Sub Region:{' '}
                     <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {data?.subregion}
+                      {allDetails?.subregion}
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
                     Capital:{' '}
                     <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {data?.capital}
+                      {allDetails?.capital}
                     </span>
                   </p>
                 </article>
@@ -135,7 +84,7 @@ function CountryDetail() {
                   <p className="font-medium md:text-xl">
                     Top Level Domain:{' '}
                     <span className="dark:text-bg-light/75 text-[14px] font-light md:text-lg">
-                      {data?.tld?.toLocaleString()}
+                      {allDetails?.tld?.toLocaleString()}
                     </span>
                   </p>
                   <p className="font-medium md:text-xl">
@@ -156,7 +105,7 @@ function CountryDetail() {
             {/* Border countries */}
             <div className="dark:text-text-dark/80 flex-wrap gap-4 space-y-2 sm:flex lg:items-center lg:space-y-0">
               <p className="font-medium md:text-xl">Border Countries:</p>
-              {data?.borders?.map((b) => (
+              {allDetails?.borders?.map((b) => (
                 <button
                   key={b}
                   className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md"
