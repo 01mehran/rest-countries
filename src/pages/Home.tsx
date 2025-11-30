@@ -1,6 +1,7 @@
 // Components;
 import CountryInfo from '@/components/CountryInfo';
 import Header from '@/components/Header';
+import Loading from '@/components/Loading';
 
 // Icons;
 import { MdSearch } from 'react-icons/md';
@@ -46,7 +47,7 @@ function Home() {
           )}
 
           {isLoading ? (
-            <div className="absolute top-1/2 left-1/2 size-18 -translate-x-1/2 transform animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+            <Loading />
           ) : (
             allCountries.map((country) => (
               <CountryInfo key={country.id} countryData={country} />
