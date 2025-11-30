@@ -1,16 +1,14 @@
-import type { TCountry } from '@/pages/Home';
+import type { TAllCountries } from '@/servises/GetAllCountries';
 import { Link } from 'react-router-dom';
 
 interface TCountryInfoProps {
-  data: TCountry;
+  data: TAllCountries;
 }
 
 function CountryInfo({ data }: TCountryInfoProps) {
   return (
     <Link to={`/countryDetailes/${data.cca3}`}>
-      <div
-        className="bg-text-dark dark:bg-element-dark dark:text-bg-light/90 dark:shadow-bg-dark h-80 w-full cursor-pointer rounded-md shadow-sm transition-transform duration-200 hover:scale-105 hover:shadow-md dark:shadow-xl"
-      >
+      <div className="bg-text-dark dark:bg-element-dark dark:text-bg-light/90 dark:shadow-bg-dark h-80 w-full cursor-pointer rounded-md shadow-sm transition-transform duration-200 hover:scale-105 hover:shadow-md dark:shadow-xl">
         <article className="h-40">
           <img
             src={data.flag.png}

@@ -56,7 +56,8 @@ function CountryDetail() {
 
     getACountry();
   }, [cca3]);
-  console.log(data);
+
+  data && console.log(data);
   const nativeCommon =
     data?.name.nativeName[Object.keys(data?.name.nativeName)[0]].common;
 
@@ -156,7 +157,10 @@ function CountryDetail() {
             <div className="dark:text-text-dark/80 flex-wrap gap-4 space-y-2 sm:flex lg:items-center lg:space-y-0">
               <p className="font-medium md:text-xl">Border Countries:</p>
               {data?.borders?.map((b) => (
-                <button className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md">
+                <button
+                  key={b}
+                  className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md"
+                >
                   {b}
                 </button>
               ))}
