@@ -16,7 +16,7 @@ interface TCountryDetail {
   population: number;
   region: string;
   subregion?: string;
-  capital?: string;
+  capital?: string[];
   languages: {
     [key: string]: string;
   };
@@ -33,7 +33,8 @@ interface TCountryDetail {
 
 function GetcountryDetails(cca3: string) {
   const [allDetails, setAllDetails] = useState<TCountryDetail | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,9 +45,16 @@ function GetcountryDetails(cca3: string) {
 
         const data = await res.json();
         setAllDetails(data[0]);
-        setIsLoading(false);
       } catch (err) {
         console.error(err);
+
+        // Check error
+        if (err instanceof Error) {
+          setIsError(err.message);
+        } else {
+          setIsError(String(err));
+        }
+      } finally {
         setIsLoading(false);
       }
     }
@@ -54,17 +62,22 @@ function GetcountryDetails(cca3: string) {
     getACountry();
   }, [cca3]);
 
+  // Get navive name dynamically;
   const nativeName =
     allDetails?.name.nativeName[Object.keys(allDetails?.name.nativeName)[0]]
       .common;
 
+  // Get currenny dynamically;
   const currencyName = allDetails?.currencies
     ? allDetails.currencies[Object.keys(allDetails.currencies)[0]].name
     : 'N/A';
-
+ 
+    // Get currency symbol dynamically;
   const currencySymbol = allDetails?.currencies
     ? allDetails.currencies[Object.keys(allDetails.currencies)[0]].symbol
     : '';
+
+  // Get all languages dynamically;
   const allLanguages = allDetails?.languages
     ? Object.values(allDetails.languages).join(', ')
     : 'N/A';
@@ -76,6 +89,7 @@ function GetcountryDetails(cca3: string) {
     currencySymbol,
     allLanguages,
     isLoading,
+    isError,
   };
 }
 
