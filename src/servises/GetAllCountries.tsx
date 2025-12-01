@@ -12,16 +12,35 @@ export interface TAllCountries {
   cca3: string;
 }
 
+// Types that come from the raw api;
+export interface TRawApi {
+  capital?: string[];
+  cca3: string;
+  flags: {
+    png: string;
+    svg: string;
+    alt?: string;
+  };
+  name: {
+    common: string;
+    official: string;
+    nativeName?: Record<string, { official: string; common: string }>;
+  };
+  population: number;
+  region: string;
+}
+
 function GetAllCountries() {
   // States;
   const [allCountries, setAllCountries] = useState<TAllCountries[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<string | null>(null);
 
   const base_url = `https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags,cca3`;
 
   useEffect(() => {
     setIsLoading(true);
+
     async function getCountries() {
       try {
         const res = await fetch(base_url);
@@ -29,21 +48,21 @@ function GetAllCountries() {
 
         const rawData = await res.json();
 
-        const formatted: TAllCountries[] = rawData.map((c: any, i: number) => ({
-          id: i,
-          flag: { png: c.flags?.png },
-          name: { common: c.name?.common },
-          population: c.population,
-          region: c.region,
-          capital: c.capital,
-          cca3: c.cca3,
-        }));
+        const formatted: TAllCountries[] = rawData.map(
+          (c: TRawApi, i: number) => ({
+            id: i,
+            flag: { png: c.flags?.png },
+            name: { common: c.name?.common },
+            population: c.population,
+            region: c.region,
+            capital: c.capital,
+            cca3: c.cca3,
+          }),
+        );
 
         setAllCountries(formatted);
-        setIsLoading(false);
       } catch (err) {
         console.error(err);
-        setIsLoading(false);
 
         // Check error;
         if (err instanceof Error) {
