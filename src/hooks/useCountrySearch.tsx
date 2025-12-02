@@ -4,7 +4,10 @@ import type { TAllCountries } from '@/servises/GetAllCountries';
 // hooks;
 import { useEffect, useState } from 'react';
 
-function useCountrySearch(allCountries: TAllCountries[]) {
+function useCountrySearch(
+  allCountries: TAllCountries[],
+  selectedRegion: string | null,
+) {
   //  States
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedCountries, setSearchedCountries] = useState(allCountries);
@@ -13,7 +16,17 @@ function useCountrySearch(allCountries: TAllCountries[]) {
   // Update searched countries when allCountries changes
   useEffect(() => {
     setSearchedCountries(allCountries);
-  }, [allCountries]);
+
+    // Filter by region;
+    if (selectedRegion) {
+      const filteredByRegion = allCountries.filter((c) =>
+        c.region.toLowerCase().includes(selectedRegion.toLowerCase()),
+      );
+      setSearchedCountries(filteredByRegion);
+    } else {
+      setSearchedCountries(allCountries);
+    }
+  }, [allCountries, selectedRegion]);
 
   const handleSearchCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

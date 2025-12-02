@@ -11,16 +11,30 @@ import GetAllCountries from '@/servises/GetAllCountries';
 
 // Hooks;
 import useCountrySearch from '@/hooks/useCountrySearch';
+// import SelectOptions from '@/components/SelectOptions';
+import { useState } from 'react';
 import SelectOptions from '@/components/SelectOptions';
 
 function Home() {
   // Data fetching;
   const { allCountries, isLoading, isError } = GetAllCountries();
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [isRegionListOpen, setIsRegionOpen] = useState(false);
 
   // Country search hook;
   const { handleSearchCountry, searchedCountries, msg, searchQuery } =
-    useCountrySearch(allCountries);
+    useCountrySearch(allCountries, selectedRegion);
 
+  // Update selected region;
+  const handleSelectedRegion = (region: string) => {
+    setSelectedRegion(region);
+    setIsRegionOpen((prev) => !prev);
+  };
+
+  // Toggle options list;
+  const handleOpenOptions = () => {
+    setIsRegionOpen((prev) => !prev);
+  };
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh pb-4">
       <Header />
@@ -37,9 +51,14 @@ function Home() {
             />
             <MdSearch className="text-input-light dark:text-text-dark absolute top-1/2 translate-7 -translate-y-1/2 transform text-2xl" />
           </form>
-          
+
           {/* Filter by region */}
-          <SelectOptions />
+          <SelectOptions
+            isRegionListOpen={isRegionListOpen}
+            handleSelectedRegion={handleSelectedRegion}
+            handleOpenOptions={handleOpenOptions}
+            selectedRegion={selectedRegion}
+          />
         </section>
 
         <section className="small:mx-0 mx-14 mt-8 grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-6 sm:mx-0 sm:gap-4 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] lg:gap-14">

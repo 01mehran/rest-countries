@@ -1,25 +1,22 @@
 // Hooks;
-import { Activity, useState } from 'react';
+import { Activity } from 'react';
 
 // Icons;
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-function SelectOptions() {
-  //  States;
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [isRegionListOpen, setIsRegionOpen] = useState(false);
+interface ISelectOptions {
+  isRegionListOpen: boolean;
+  selectedRegion: string | null;
+  handleSelectedRegion: (region: string) => void;
+  handleOpenOptions: () => void;
+}
 
-  // Update selected region;
-  const handleSelectedRegion = (region: string) => {
-    setSelectedRegion(region);
-    setIsRegionOpen((prev) => !prev);
-  };
-
-  // Toggle options list;
-  const handleOpenOptions = () => {
-    setIsRegionOpen((prev) => !prev);
-  };
-
+function SelectOptions({
+  isRegionListOpen,
+  handleSelectedRegion,
+  handleOpenOptions,
+  selectedRegion,
+}: ISelectOptions) {
   return (
     <div className="dark:text-text-dark relative w-50 md:w-60">
       <article
