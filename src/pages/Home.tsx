@@ -30,7 +30,7 @@ function Home() {
             <input
               type="text"
               placeholder="Search for a country..."
-              className="placeholder:text-input-light dark:text-text-dark dark:placeholder:text-text-dark h-full w-full rounded-md border-0 pr-4 pl-18 tracking-tight outline-0 placeholder:text-[14px] placeholder:font-medium"
+              className="placeholder:text-input-light dark:text-text-dark dark:placeholder:text-text-dark transition-outline dark:focus:outline-text-dark text-md h-full w-full rounded-md border-0 pr-4 pl-18 tracking-wide capitalize accent-blue-600 outline-0 placeholder:text-[14px] placeholder:font-medium focus:outline-2 focus:outline-blue-600"
               onChange={handleSearchCountry}
               value={searchQuery}
             />
@@ -49,7 +49,7 @@ function Home() {
           </article>
         </section>
 
-        <section className="mx-10 mt-8 grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-6 sm:mx-0 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:gap-18">
+        <section className="small:mx-0 mx-14 mt-8 grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-6 sm:mx-0 sm:gap-4 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] lg:gap-14">
           {/* show error message if any */}
           {isError && (
             <p className="font-bold text-red-600 text-shadow-md text-shadow-slate-300 dark:text-shadow-black">
