@@ -11,6 +11,7 @@ import GetAllCountries from '@/servises/GetAllCountries';
 
 // Hooks;
 import useCountrySearch from '@/hooks/useCountrySearch';
+import SelectOptions from '@/components/SelectOptions';
 
 function Home() {
   // Data fetching;
@@ -36,17 +37,9 @@ function Home() {
             />
             <MdSearch className="text-input-light dark:text-text-dark absolute top-1/2 translate-7 -translate-y-1/2 transform text-2xl" />
           </form>
+          
           {/* Filter by region */}
-          <article className="bg-text-dark dark:bg-element-dark w-42 rounded-md px-1.5 shadow-sm">
-            <select className="text-element-dark dark:text-text-dark dark:bg-element-dark flex h-12 w-full items-center rounded-md border-0 pr-4 text-2xl text-[14px] font-semibold outline-0">
-              <option defaultValue="Filter by Region" disabled hidden></option>
-              <option value="Africa">Africa</option>
-              <option value="America">America</option>
-              <option value="Asia">Asia</option>
-              <option value="Europe">Europe</option>
-              <option value="Oceania">Oceania</option>
-            </select>
-          </article>
+          <SelectOptions />
         </section>
 
         <section className="small:mx-0 mx-14 mt-8 grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-6 sm:mx-0 sm:gap-4 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] lg:gap-14">

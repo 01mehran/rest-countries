@@ -1,0 +1,76 @@
+// Hooks;
+import { Activity, useState } from 'react';
+
+// Icons;
+import { MdKeyboardArrowDown } from 'react-icons/md';
+
+function SelectOptions() {
+  //  States;
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [isRegionListOpen, setIsRegionOpen] = useState(false);
+
+  // Update selected region;
+  const handleSelectedRegion = (region: string) => {
+    setSelectedRegion(region);
+    setIsRegionOpen((prev) => !prev);
+  };
+
+  // Toggle options list;
+  const handleOpenOptions = () => {
+    setIsRegionOpen((prev) => !prev);
+  };
+
+  return (
+    <div className="dark:text-text-dark relative w-50 md:w-60">
+      <article
+        onClick={handleOpenOptions}
+        className="bg-text-dark dark:bg-element-dark flex w-full cursor-pointer items-center justify-between rounded-md px-4 py-3 shadow-sm"
+      >
+        <p className="text-md">{selectedRegion || 'Filter by Region'}</p>
+        <span
+          className={`text-2xl ${isRegionListOpen ? 'rotate-180' : ''} transition-transform`}
+        >
+          <MdKeyboardArrowDown />
+        </span>
+      </article>
+
+      {/* Regions list; */}
+      <Activity mode={isRegionListOpen ? 'visible' : 'hidden'}>
+        <ul className="text-element-dark dark:text-text-dark dark:bg-element-dark bg-text-dark absolute -bottom-45 z-10 w-full cursor-pointer items-center space-y-2 rounded-md border-0 px-5 py-3 font-semibold shadow-sm outline-0">
+          <li
+            className="transition-px duration-200 hover:px-1.5"
+            onClick={() => handleSelectedRegion('Asia')}
+          >
+            Africa
+          </li>
+          <li
+            className="transition-px duration-200 hover:px-1.5"
+            onClick={() => handleSelectedRegion('Europe')}
+          >
+            America
+          </li>
+          <li
+            className="transition-px duration-200 hover:px-1.5"
+            onClick={() => handleSelectedRegion('America')}
+          >
+            Asia
+          </li>
+          <li
+            className="transition-px duration-200 hover:px-1.5"
+            onClick={() => handleSelectedRegion('Africa')}
+          >
+            Europe
+          </li>
+          <li
+            className="transition-px duration-200 hover:px-1.5"
+            onClick={() => handleSelectedRegion('Oceania')}
+          >
+            Oceania
+          </li>
+        </ul>
+      </Activity>
+    </div>
+  );
+}
+
+export default SelectOptions;
