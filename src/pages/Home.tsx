@@ -8,41 +8,17 @@ import { MdSearch } from 'react-icons/md';
 
 // Services;
 import GetAllCountries from '@/servises/GetAllCountries';
-import { useEffect, useState } from 'react';
+
+// Hooks;
+import useCountrySearch from '@/hooks/useCountrySearch';
 
 function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
+  // Data fetching;
   const { allCountries, isLoading, isError } = GetAllCountries();
-  const [searchedCountries, setSearchedCountries] = useState(allCountries);
-  const [msg, setMsg] = useState<string | null>('');
 
-  useEffect(() => {
-    setSearchedCountries(allCountries);
-  }, [allCountries]);
-
-  const handleSearchCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const value = e.target.value;
-    setSearchQuery(value);
-
-    if (value.trim() === '') {
-      setSearchedCountries(allCountries);
-      setMsg('');
-      return;
-    }
-    const searchedCountries = allCountries.filter((c) =>
-      c.name.common
-        .toLocaleLowerCase()
-        .includes(searchQuery?.toLocaleLowerCase()),
-    );
-    if (!searchedCountries.length) {
-      setMsg('No country found');
-    } else {
-      setMsg('');
-    }
-    setSearchedCountries(searchedCountries);
-  };
+  // Country search hook;
+  const { handleSearchCountry, searchedCountries, msg, searchQuery } =
+    useCountrySearch(allCountries);
 
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh pb-4">
@@ -56,6 +32,7 @@ function Home() {
               placeholder="Search for a country..."
               className="placeholder:text-input-light dark:text-text-dark dark:placeholder:text-text-dark h-full w-full rounded-md border-0 pr-4 pl-18 tracking-tight outline-0 placeholder:text-[14px] placeholder:font-medium"
               onChange={handleSearchCountry}
+              value={searchQuery}
             />
             <MdSearch className="text-input-light dark:text-text-dark absolute top-1/2 translate-7 -translate-y-1/2 transform text-2xl" />
           </form>
@@ -73,18 +50,20 @@ function Home() {
         </section>
 
         <section className="mx-10 mt-8 grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-6 sm:mx-0 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:gap-18">
+          {/* show error message if any */}
           {isError && (
             <p className="font-bold text-red-600 text-shadow-md text-shadow-slate-300 dark:text-shadow-black">
               {isError}
             </p>
           )}
-
+          {/* show message if no country found */}
           {msg && (
             <p className="font-bold text-red-600 text-shadow-md text-shadow-slate-300 dark:text-shadow-black">
               {msg}
             </p>
           )}
 
+          {/* show loading spinner */}
           {isLoading ? (
             <Loading />
           ) : (
