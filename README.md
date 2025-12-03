@@ -5,6 +5,24 @@ The app supports **Dark Mode**, and users can view **detailed information** abou
 
 ---
 
+## Screenshots
+
+#### 1. desktop screen
+
+![demo](/src/assets/images/demoDesktop.png)
+
+#### 2. light mode
+
+![demo](/src/assets/images/lightmode.png)
+
+#### 3. mobile screen
+
+![demo](/src/assets/images/demoSearch.png)
+
+#### 4. details page
+
+![demo](/src/assets/images/demoDetails.png)
+
 ## Features
 
 ### 🌗 Dark Mode
@@ -67,8 +85,6 @@ npm run dev
 
 This project uses the REST Countries API:
 https://restcountries.com
-
-
 
 ## 🤝 Contributing
 
