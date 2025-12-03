@@ -23,6 +23,10 @@ The app supports **Dark Mode**, and users can view **detailed information** abou
 
 ![demo](/src/assets/images/demoDetails.png)
 
+## Online Demo 👇
+
+#### click **[here](https://countries-innfo.netlify.app/)** to Expolre countries
+
 ## Features
 
 ### 🌗 Dark Mode
