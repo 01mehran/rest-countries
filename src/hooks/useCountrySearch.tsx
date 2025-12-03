@@ -1,4 +1,4 @@
-// Type
+// Type;
 import type { TAllCountries } from '@/servises/GetAllCountries';
 
 // hooks;
@@ -15,8 +15,6 @@ function useCountrySearch(
 
   // Update searched countries when allCountries changes
   useEffect(() => {
-    setSearchedCountries(allCountries);
-
     // Filter by region;
     if (selectedRegion) {
       const filteredByRegion = allCountries.filter((c) =>
