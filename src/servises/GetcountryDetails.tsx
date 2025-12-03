@@ -38,6 +38,7 @@ function GetcountryDetails(cca3: string) {
 
   useEffect(() => {
     setIsLoading(true);
+    
     async function getACountry() {
       try {
         const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}`);

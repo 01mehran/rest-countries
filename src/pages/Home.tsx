@@ -80,7 +80,7 @@ function Home() {
             <Loading />
           ) : (
             searchedCountries.map((country) => (
-              <CountryInfo key={country.id} countryData={country} />
+              <CountryInfo key={country.id} countryData={country} allCountries={allCountries} />
             ))
           )}
         </section>

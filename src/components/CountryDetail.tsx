@@ -1,5 +1,5 @@
 // Hooks;
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 // Components;
 import Header from './Header';
@@ -10,10 +10,19 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 // Services;
 import GetcountryDetails from '@/servises/GetcountryDetails';
 import Loading from './Loading';
+import type { TAllCountries } from '@/servises/GetAllCountries';
+
+interface LocationState {
+  allCountries: TAllCountries[];
+}
 
 function CountryDetail() {
   // Get cca3(code) from url params;
   const { cca3 } = useParams();
+
+  // Get all countries data from location state;
+  const location = useLocation();
+  const { allCountries } = location.state as LocationState;
 
   // Get country details from service;
   const {
@@ -28,6 +37,15 @@ function CountryDetail() {
 
   // Navigate hook for direct navigation;
   const navigate = useNavigate();
+
+  const allBorders =
+    allDetails?.borders && allCountries
+      ? allCountries
+          .filter((country: { cca3: string }) =>
+            allDetails?.borders?.includes(country.cca3),
+          )
+          .map((country: { name: { common: string } }) => country.name.common)
+      : [];
 
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh">
@@ -121,16 +139,16 @@ function CountryDetail() {
                     </div>
                   </div>
                   {/* Border countries */}
-                  <div className="dark:text-text-dark/80 flex flex-wrap gap-2 lg:items-center">
+                  <div className="dark:text-text-dark/80 flex flex-wrap items-center gap-2">
                     <p className="font-medium md:text-xl">Border Countries:</p>
                     <article className="flex flex-wrap items-center gap-2">
-                      {allDetails?.borders && allDetails.borders.length > 0 ? (
-                        allDetails.borders.map((b) => (
+                      {allBorders && allBorders.length > 0 ? (
+                        allBorders.map((name: string) => (
                           <button
-                            key={b}
-                            className="dark:bg-element-dark w-26 cursor-pointer rounded-sm px-2 py-px shadow-md"
+                            key={name}
+                            className="dark:bg-element-dark w-32 cursor-pointer rounded-sm px-2 py-1.5 text-sm shadow-lg"
                           >
-                            {b}
+                            {name}
                           </button>
                         ))
                       ) : (

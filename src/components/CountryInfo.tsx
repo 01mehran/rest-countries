@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 // Type for country info props;
 interface TCountryInfoProps {
   countryData: TAllCountries;
+  allCountries: TAllCountries[];
 }
 
-function CountryInfo({ countryData }: TCountryInfoProps) {
+function CountryInfo({ countryData, allCountries }: TCountryInfoProps) {
   return (
-    <Link to={`/countryDetailes/${countryData.cca3}`}>
+    <Link to={`/countryDetailes/${countryData.cca3}`} state={{ allCountries }}>
       <div className="bg-text-dark dark:bg-element-dark dark:text-bg-light/90 dark:shadow-bg-dark h-80 w-full cursor-pointer rounded-md shadow-sm transition-transform duration-200 hover:scale-105 hover:shadow-md dark:shadow-xl">
         {/* Country flag; */}
         <article className="h-40">
