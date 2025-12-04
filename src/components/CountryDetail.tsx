@@ -1,5 +1,5 @@
 // Hooks;
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 // Components;
 import Header from './Header';
@@ -38,6 +38,7 @@ function CountryDetail() {
   // Navigate hook for direct navigation;
   const navigate = useNavigate();
 
+  // Get all border countries names;
   const allBorders =
     allDetails?.borders && allCountries
       ? allCountries
@@ -46,6 +47,10 @@ function CountryDetail() {
           )
           .map((country: { name: { common: string } }) => country.name.common)
       : [];
+
+  // Function to find country by its name;
+  const findCountryByName = (name: string) =>
+    allCountries.find((c) => c.name.common === name);
 
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh">
@@ -143,14 +148,22 @@ function CountryDetail() {
                     <p className="font-medium md:text-xl">Border Countries:</p>
                     <article className="flex flex-wrap items-center gap-2">
                       {allBorders && allBorders.length > 0 ? (
-                        allBorders.map((name: string) => (
-                          <button
-                            key={name}
-                            className="dark:bg-element-dark w-32 cursor-pointer rounded-sm px-2 py-1.5 text-sm shadow-lg"
-                          >
-                            {name}
-                          </button>
-                        ))
+                        allBorders.map((name: string) => {
+                          const borders = findCountryByName(name);
+                          if (!borders) return null;
+
+                          return (
+                            <Link
+                              to={`/countryDetailes/${borders.cca3}`}
+                              state={{ allCountries }}
+                              key={borders.cca3}
+                            >
+                              <button className="dark:bg-element-dark w-32 cursor-pointer rounded-sm px-2 py-1.5 text-sm shadow-lg">
+                                {borders.name.common}
+                              </button>
+                            </Link>
+                          );
+                        })
                       ) : (
                         <span className="text-input-light text- font-bold italic">
                           No borders
