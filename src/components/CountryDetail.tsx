@@ -74,7 +74,7 @@ function CountryDetail() {
             ) : (
               <>
                 {/* Country flag */}
-                <div className="small:w-84 lg:min-w-[400px] xl:min-w-1/3">
+                <div className="small:w-84 lg:min-w-100 xl:min-w-1/3">
                   <img
                     src={allDetails?.flags.png}
                     alt={`${allDetails?.name.common} flag`}

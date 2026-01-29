@@ -46,7 +46,7 @@ function GetAllCountries() {
     async function getCountries() {
       try {
         const res = await fetch(base_url);
-        if (!res.ok) throw new Error('Something went wrong');
+        if (!res.ok) throw new Error('Something went wrong!');
 
         const rawData = await res.json();
         

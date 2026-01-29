@@ -35,13 +35,14 @@ function Home() {
   const handleOpenOptions = () => {
     setIsRegionOpen((prev) => !prev);
   };
+
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-dvh pb-4">
       <Header />
       <main className="px-4 lg:px-24">
         {/* Search input */}
         <section className="mt-8 items-center space-y-6 sm:justify-between md:flex md:space-y-0">
-          <form className="bg-text-dark dark:bg-element-dark relative mx-auto h-12 w-full rounded-md shadow-sm sm:mx-0 sm:max-w-[400px]">
+          <form className="bg-text-dark dark:bg-element-dark relative mx-auto h-12 w-full rounded-md shadow-sm sm:mx-0 sm:max-w-100">
             <input
               type="text"
               placeholder="Search for a country..."
@@ -80,7 +81,11 @@ function Home() {
             <Loading />
           ) : (
             searchedCountries.map((country) => (
-              <CountryInfo key={country.id} countryData={country} allCountries={allCountries} />
+              <CountryInfo
+                key={country.id}
+                countryData={country}
+                allCountries={allCountries}
+              />
             ))
           )}
         </section>

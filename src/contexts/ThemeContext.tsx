@@ -15,7 +15,7 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-export const themeContext = createContext<ThemeContextType | null>(null);
+const themeContext = createContext<ThemeContextType | null>(null);
 
 export default function ThemeContextProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
