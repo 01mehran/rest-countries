@@ -1,8 +1,8 @@
-// Type;
-import type { TAllCountries } from '@/servises/GetAllCountries';
-
 // hooks;
 import { useEffect, useState } from 'react';
+
+// Types;
+import type { TAllCountries } from '@/types/Types';
 
 function useCountrySearch(
   allCountries: TAllCountries[],

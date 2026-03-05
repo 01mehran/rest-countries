@@ -1,35 +1,8 @@
+// Hooks;
 import { useEffect, useState } from 'react';
 
 // Type for country details;
-interface TCountryDetail {
-  name: {
-    common: string;
-    nativeName: {
-      [key: string]: {
-        common: string;
-      };
-    };
-  };
-  flags: {
-    png: string;
-  };
-  population: number;
-  region: string;
-  subregion?: string;
-  capital?: string[];
-  languages: {
-    [key: string]: string;
-  };
-  cca3: string;
-  currencies?: {
-    [key: string]: {
-      name: string;
-      symbol: string;
-    };
-  };
-  tld?: string[];
-  borders?: string[];
-}
+import type { TCountryDetail } from '@/types/Types';
 
 function GetcountryDetails(cca3: string) {
   const [allDetails, setAllDetails] = useState<TCountryDetail | null>(null);
@@ -38,7 +11,7 @@ function GetcountryDetails(cca3: string) {
 
   useEffect(() => {
     setIsLoading(true);
-    
+
     async function getACountry() {
       try {
         const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}`);
@@ -72,8 +45,8 @@ function GetcountryDetails(cca3: string) {
   const currencyName = allDetails?.currencies
     ? allDetails.currencies[Object.keys(allDetails.currencies)[0]].name
     : 'N/A';
- 
-    // Get currency symbol dynamically;
+
+  // Get currency symbol dynamically;
   const currencySymbol = allDetails?.currencies
     ? allDetails.currencies[Object.keys(allDetails.currencies)[0]].symbol
     : '';

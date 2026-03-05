@@ -10,11 +10,9 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 // Services;
 import GetcountryDetails from '@/servises/GetcountryDetails';
 import Loading from './Loading';
-import type { TAllCountries } from '@/servises/GetAllCountries';
 
-interface LocationState {
-  allCountries: TAllCountries[];
-}
+// Types;
+import type { LocationState } from '@/types/Types';
 
 function CountryDetail() {
   // Get cca3(code) from url params;

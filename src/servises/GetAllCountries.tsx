@@ -1,36 +1,8 @@
 // Hooks;
 import { useEffect, useState } from 'react';
 
-// Type for all countries data from api;
-export interface TAllCountries {
-  id: number;
-  flag: { png: string };
-  name: { common: string };
-  population: number;
-  region: string;
-  capital?: string[];
-  cca3: string;
-  borders?: string[];
-}
-
-// Types that come from the raw api;
-export interface TRawApi {
-  capital?: string[];
-  cca3: string;
-  flags: {
-    png: string;
-    svg: string;
-    alt?: string;
-  };
-  name: {
-    common: string;
-    official: string;
-    nativeName?: Record<string, { official: string; common: string }>;
-  };
-  population: number;
-  region: string;
-  borders?: string[];
-}
+// Types;
+import type { TAllCountries, TRawApi } from '@/types/Types';
 
 function GetAllCountries() {
   // States;
@@ -49,7 +21,7 @@ function GetAllCountries() {
         if (!res.ok) throw new Error('Something went wrong!');
 
         const rawData = await res.json();
-        
+
         const formatted: TAllCountries[] = rawData.map(
           (c: TRawApi, i: number) => ({
             id: i,

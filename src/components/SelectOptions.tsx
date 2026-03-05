@@ -4,12 +4,8 @@ import { Activity } from 'react';
 // Icons;
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-interface ISelectOptions {
-  isRegionListOpen: boolean;
-  selectedRegion: string | null;
-  handleSelectedRegion: (region: string) => void;
-  handleOpenOptions: () => void;
-}
+// Types;
+import type { ISelectOptions } from '@/types/Types';
 
 function SelectOptions({
   isRegionListOpen,

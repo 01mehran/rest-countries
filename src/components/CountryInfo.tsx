@@ -1,14 +1,8 @@
-// Type;
-import type { TAllCountries } from '@/servises/GetAllCountries';
-
 // Libraries
 import { Link } from 'react-router-dom';
 
-// Type for country info props;
-interface TCountryInfoProps {
-  countryData: TAllCountries;
-  allCountries: TAllCountries[];
-}
+// Types;
+import type { TCountryInfoProps } from '@/types/Types';
 
 function CountryInfo({ countryData, allCountries }: TCountryInfoProps) {
   return (

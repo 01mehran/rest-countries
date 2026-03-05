@@ -2,6 +2,7 @@
 import CountryInfo from '@/components/CountryInfo';
 import Header from '@/components/Header';
 import Loading from '@/components/Loading';
+import SelectOptions from '@/components/SelectOptions';
 
 // Icons;
 import { MdSearch } from 'react-icons/md';
@@ -11,9 +12,7 @@ import GetAllCountries from '@/servises/GetAllCountries';
 
 // Hooks;
 import useCountrySearch from '@/hooks/useCountrySearch';
-// import SelectOptions from '@/components/SelectOptions';
 import { useState } from 'react';
-import SelectOptions from '@/components/SelectOptions';
 
 function Home() {
   // Data fetching;
